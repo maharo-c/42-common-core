@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maharo <maharo@student.42.fr>              +#+  +:+       +#+         #
+#    By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 12:51:15 by maharo            #+#    #+#              #
-#    Updated: 2024/05/14 14:25:19 by maharo           ###   ########.fr        #
+#    Updated: 2024/05/28 16:16:39 by maharo-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,10 @@ SRCS = \
 		ft_memcmp.c\
 		ft_strnstr.c\
 		ft_atoi.c\
+		ft_calloc.c\
+		ft_strdup.c\
+		ft_strjoin.c\
+		ft_strtrim.c\
 		
 OBJS = $(SRCS:%.c=%.o)
 
