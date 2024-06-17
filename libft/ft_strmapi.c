@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 15:50:21 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/13 06:42:36 by margarita        ###   ########.fr       */
+/*   Created: 2024/06/14 09:32:08 by margarita         #+#    #+#             */
+/*   Updated: 2024/06/15 08:17:18 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+#include <ctype.h> // Necesario para toupper
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*str;
+	size_t	len;
+	char	*result;
 	size_t	i;
-	size_t	j;
 
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	i = 0;
+	if (s == NULL || f == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = 0;
-	return (str);
+	len = ft_strlen(s);
+	result = (char *)malloc((len + 1) * sizeof(char));
+	if (result == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		result[i] = f((unsigned int)i, s[i]);
+		i++;
+	}
+	result[len] = '\0';
+	return (result);
 }

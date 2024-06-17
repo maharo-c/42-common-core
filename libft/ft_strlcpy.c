@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:37:02 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/05/23 12:38:36 by maharo-c         ###   ########.fr       */
+/*   Updated: 2024/06/13 06:41:16 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
-
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

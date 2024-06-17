@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 12:37:12 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/05/23 12:38:36 by maharo-c         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:56:08 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (s1[i] && s2[i] && i < n)
 	{
 		if (cmp_char(s1[i], s2[i]))
-			return (s1[i] - s2[i]);
+			return (cmp_char(s1[i], s2[i]));
 		i++;
 	}
 	if (i < n)

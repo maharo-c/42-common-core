@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: margarita <margarita@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 12:51:15 by maharo            #+#    #+#              #
-#    Updated: 2024/05/28 16:16:39 by maharo-c         ###   ########.fr        #
+#    Updated: 2024/06/18 01:11:14 by margarita        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,32 @@ SRCS = \
 		ft_atoi.c\
 		ft_calloc.c\
 		ft_strdup.c\
+		ft_substr.c\
 		ft_strjoin.c\
 		ft_strtrim.c\
 		ft_split.c\
-		
+		ft_itoa.c\
+		ft_strmapi.c\
+		ft_striteri.c\
+		ft_putchar_fd.c\
+		ft_putstr_fd.c\
+		ft_putendl_fd.c\
+		ft_putnbr_fd.c\
+
 OBJS = $(SRCS:%.c=%.o)
+
+BONUS = \
+		ft_lstnew_bonus.c\
+		ft_lstadd_front_bonus.c\
+		ft_lstsize_bonus.c\
+		ft_lstlast_bonus.c\
+		ft_lstadd_back_bonus.c\
+		ft_lstdelone_bonus.c\
+		ft_lstclear_bonus.c\
+		ft_lstiter_bonus.c\
+		ft_lstmap_bonus.c\
+
+BONUS_OBJS = $(BONUS:%.c=%.o)
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
@@ -51,7 +72,7 @@ $(NAME): $(OBJS)
 	@ar rcs $@ $^
 	@echo "make all correct"
 
-$(OBJS): %.o:%.c
+$(OBJS) $(BONUS_OBJS): %.o:%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -65,4 +86,7 @@ fclean: clean
 re: fclean all
 	@echo "make re correct"
 
-.PHONY: all clean fclean re bonu
+bonus: $(OBJS) $(BONUS_OBJS)
+		@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
+.PHONY: all clean fclean re bonus
