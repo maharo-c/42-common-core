@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:49:17 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/19 18:09:08 by maharo-c         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:45:11 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	ft_checks(va_list va, char c)
 	else if (c == '%')
 		count = ft_putchar('%');
 	else
-		count = write
+		count = write(1, &c, 1);
+	return (count);
 }
 
 int ft_printf(char const *str, ...)
@@ -35,6 +36,11 @@ int ft_printf(char const *str, ...)
 	while (*str)
 	{
 		if (*str == '%')
-			;
+			len += ft_checks(va, *(++str));
+		else
+			len += ft_putchar(*str);
+		str++;
 	}
+	va_end(va);
+	return (len);
 }
