@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_lib.h                                       :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 16:06:23 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/19 18:09:12 by maharo-c         ###   ########.fr       */
+/*   Created: 2024/06/21 11:53:38 by margarita         #+#    #+#             */
+/*   Updated: 2024/06/24 17:44:31 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_LIBHH
-# define PRINTF_LIB_H
+#include "ft_printf.h"
+#include <stdio.h>
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
+int ft_putptr(void *ptr)
+{
+    int count;
 
-int ft_printf(char const *str, ...);
-int	ft_putchar(int c);
-
-#endif
+    count = 0;
+    count += ft_putstr("0x");
+    count += ft_putnbr_base((unsigned long long)ptr, HEXL);
+    return (count);
+}

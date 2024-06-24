@@ -6,12 +6,16 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:49:17 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/20 19:45:11 by margarita        ###   ########.fr       */
+/*   Updated: 2024/06/24 22:43:49 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_lib.h"
+#include "ft_printf.h"
 # include <stdarg.h>
+
+/**
+ * 
+ */
 
 static int	ft_checks(va_list va, char c)
 {
@@ -19,7 +23,20 @@ static int	ft_checks(va_list va, char c)
 
 	if (c == 'c')
 		count = ft_putchar(va_arg(va, int));
-	else if (c == '%')
+	if (c == 's')
+		count = ft_putstr(va_arg(va, char *));
+	/*else if (c == 'p')
+		if (va_arg(va, void *) == NULL)
+			count = ft_putstr("(nil)");
+		else
+			count = ft_putptr(va_arg(va, void *));*/
+	if ((c == 'd') || (c == 'i') || (c == 'u'))
+		count = ft_putnbr(va_arg(va, long), DEC);
+	if (c == 'x')
+		count = ft_putnbr_base((unsigned long)va_arg(va, long), HEXL);
+	if (c == 'X')
+		count = ft_putnbr_base((unsigned long)va_arg(va, long), HEXU);	
+	if (c == '%')
 		count = ft_putchar('%');
 	else
 		count = write(1, &c, 1);

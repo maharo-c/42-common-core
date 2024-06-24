@@ -6,11 +6,11 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:53:23 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/20 19:48:54 by margarita        ###   ########.fr       */
+/*   Updated: 2024/06/21 10:59:15 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf_lib.h"
+#include "ft_printf.h"
 
 int ft_putchar(int c)
 {
