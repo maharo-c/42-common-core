@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_print_addr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 15:53:59 by maharo-c          #+#    #+#             */
-/*   Updated: 2024/06/25 13:22:53 by maharo-c         ###   ########.fr       */
+/*   Created: 2024/06/21 11:53:38 by margarita         #+#    #+#             */
+/*   Updated: 2024/06/26 00:22:06 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_putstr(char *str)
+int	ft_print_addr(unsigned long long n)
 {
-    int count;
+	int	len;
 
-    count = 0;
-    if (!str)
-        str = "(null)";
-    while (*str)
-        count += write(1, str++, 1);
-    
-    return (count);
+	len = 0;
+	if (n == 0)
+		len += ft_putstr("(nil)");
+	else
+	{
+		len += write(1, "0x", 2);
+		len += ft_print_hex(n, 'x');
+	}
+	return (len);
 }

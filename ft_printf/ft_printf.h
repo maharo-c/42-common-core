@@ -17,17 +17,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
-# include <stdio.h>
 
-# define HEXL "0123456789abcdef"
-# define HEXU "0123456789ABCDEF"
-# define DEC "0123456789"
-
-int ft_printf(char const *str, ...);
-int	ft_putchar(int c);
-int ft_putstr(char *str);
-int ft_putptr(void *ptr);
-int	ft_putnbr_base(unsigned long nbr, char *base);
-int ft_putnbr(long nbr, char *base);
+int	ft_printf(const char *s, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_formats(const char *str, va_list ap, int i);
+int	ft_putnbr(int n);
+int	ft_print_percent(void);
+int	ft_putnbr_u(unsigned long n);
+int	ft_print_hex(unsigned long long n, char format);
+int	ft_print_addr(unsigned long long n);
 
 #endif

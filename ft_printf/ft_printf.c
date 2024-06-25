@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putptr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maharo-c <maharo-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 11:53:38 by margarita         #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:17 by maharo-c         ###   ########.fr       */
+/*   Created: 2024/06/25 16:28:02 by maharo-c          #+#    #+#             */
+/*   Updated: 2024/06/25 23:48:37 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int ft_putptr(void *ptr)
+int	ft_printf(const char *s, ...)
 {
-    int count;
+	va_list	ap;
+	int		i;
+	int		len;
 
-    if (ptr == NULL)
-        return (ft_putstr("(nil)"));
-        
-    count = 0;
-    count += ft_putstr("0x");
-    count += ft_putnbr_base((unsigned long long)ptr, HEXL);
-    return (count);
+	len = 0;
+	i = 0;
+	va_start(ap, s);
+	while (s[i])
+	{
+		if (s[i] == '%')
+		{
+			len += ft_formats(s, ap, ++i);
+		}
+		else
+			len += ft_putchar(s[i]);
+		i++;
+	}
+	va_end(ap);
+	return (len);
 }
