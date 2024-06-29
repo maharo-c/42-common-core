@@ -1,6 +1,8 @@
 {
     "files.associations": {
-        "libft.h": "c",
-        "stdio.h": "c"
-    }
+		"libft.h": "c",
+		"stdio.h": "c",
+		"fcntl.h": "c",
+		"get_next_line.h": "c"
+	}
 }
