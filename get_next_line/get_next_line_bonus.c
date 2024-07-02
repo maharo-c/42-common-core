@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 17:03:47 by margarita         #+#    #+#             */
-/*   Updated: 2024/07/02 07:25:06 by margarita        ###   ########.fr       */
+/*   Created: 2024/07/01 06:41:09 by margarita         #+#    #+#             */
+/*   Updated: 2024/07/02 08:28:56 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_join_and_free(char *text, char *buffer)
 {
@@ -96,30 +96,45 @@ char	*ft_clean_text(char *text)
 
 char	*get_next_line(int fd)
 {
-	static char	*text;
+	static char	*text[FOPEN_MAX];
 	char		*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);
-	text = ft_read_text(fd, text);
-	if (!text)
+	text[fd] = ft_read_text(fd, text[fd]);
+	if (!text[fd])
 		return (NULL);
-	next_line = ft_get_line(text);
-	text = ft_clean_text(text);
+	next_line = ft_get_line(text[fd]);
+	text[fd] = ft_clean_text(text[fd]);
 	return (next_line);
 }
 
 int main()
 {
-	int fd = open("empty.txt", O_RDONLY);
-	char *str;
-
-	str = get_next_line(fd);
-	while (str != NULL)
+	int fd1 = open("empty.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
+	int fd3 = open("test3.txt", O_RDONLY);
+		
+	char *str1 = get_next_line(fd1);
+	char *str2 = get_next_line(fd2);
+	char *str3 = get_next_line(fd3);
+	while (str1 != NULL)
 	{
-		printf("%s", str);
-		str = get_next_line(fd);
+		printf("%s", str1);
+		str1 = get_next_line(fd1);
 	}
-	fd = close(fd);
+	while (str2 != NULL)
+	{
+		printf("%s", str2);
+		str2 = get_next_line(fd2);
+	}
+	while (str3 != NULL)
+	{
+		printf("%s", str3);
+		str3 = get_next_line(fd3);
+	}
+	fd1 = close(fd1);
+	fd2 = close(fd2);
+	fd3 = close(fd3);
 	return 0;
 }
