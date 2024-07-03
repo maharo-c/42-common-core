@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 06:41:09 by margarita         #+#    #+#             */
-/*   Updated: 2024/07/02 08:28:56 by margarita        ###   ########.fr       */
+/*   Updated: 2024/07/03 13:08:23 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,32 +109,35 @@ char	*get_next_line(int fd)
 	return (next_line);
 }
 
-int main()
+/*int main()
 {
-	int fd1 = open("empty.txt", O_RDONLY);
-	int fd2 = open("test2.txt", O_RDONLY);
-	int fd3 = open("test3.txt", O_RDONLY);
-		
-	char *str1 = get_next_line(fd1);
-	char *str2 = get_next_line(fd2);
-	char *str3 = get_next_line(fd3);
-	while (str1 != NULL)
-	{
-		printf("%s", str1);
-		str1 = get_next_line(fd1);
-	}
-	while (str2 != NULL)
-	{
-		printf("%s", str2);
-		str2 = get_next_line(fd2);
-	}
-	while (str3 != NULL)
-	{
-		printf("%s", str3);
-		str3 = get_next_line(fd3);
-	}
-	fd1 = close(fd1);
-	fd2 = close(fd2);
-	fd3 = close(fd3);
-	return 0;
-}
+    int fd1 = open("empty.txt", O_RDONLY);
+    int fd2 = open("test2.txt", O_RDONLY);
+    int fd3 = open("test3.txt", O_RDONLY);
+
+    char *str1 = get_next_line(fd1);
+    char *str2 = get_next_line(fd2);
+    char *str3 = get_next_line(fd3);
+    while (str1 != NULL)
+    {
+        printf("%s", str1);
+        free(str1);  // Añade esta línea
+        str1 = get_next_line(fd1);
+    }
+    while (str2 != NULL)
+    {
+        printf("%s", str2);
+        free(str2);  // Añade esta línea
+        str2 = get_next_line(fd2);
+    }
+    while (str3 != NULL)
+    {
+        printf("%s", str3);
+        free(str3);  // Añade esta línea
+        str3 = get_next_line(fd3);
+    }
+    close(fd1);
+    close(fd2);
+    close(fd3);
+    return 0;
+}*/

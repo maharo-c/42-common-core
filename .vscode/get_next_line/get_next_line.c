@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:47 by margarita         #+#    #+#             */
-/*   Updated: 2024/07/03 13:08:22 by margarita        ###   ########.fr       */
+/*   Updated: 2024/07/02 07:25:06 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	return (next_line);
 }
 
-/*int main()
+int main()
 {
 	int fd = open("empty.txt", O_RDONLY);
 	char *str;
@@ -122,4 +122,4 @@ char	*get_next_line(int fd)
 	}
 	fd = close(fd);
 	return 0;
-}*/
+}
