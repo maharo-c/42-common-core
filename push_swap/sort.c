@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:32 by margarita         #+#    #+#             */
-/*   Updated: 2024/10/14 16:28:23 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 22:59:50 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ void	sort(t_stack **stack_a, t_stack **stack_b)
 	while (*stack_b) //Mientras existan elementos en B
 	{
 		get_target_position(stack_a, stack_b);
+		//Determina y asigna un target de cada elemento de B en función de A
 		cost(stack_a, stack_b);
+		//Calculamos el "coste" de mover cada elemento de B
+		//a la posición correcta en A
 		cheapest_move(stack_a, stack_b);
+		//Buscamos el elemento más "barato" y lo movemos
 	}
-	if (!is_sorted(*stack_a))
-		sort_stack(stack_a);
+	if (!is_sorted(*stack_a)) //Si la pila A no está ordenada
+		sort_stack(stack_a);  //Se ordena la pila A
 }
 
 /*	Pushes all the elements of stack a into stack b, except the three last.
@@ -44,17 +48,28 @@ void	push_init(t_stack **stack_a, t_stack **stack_b)
 	stack_size = get_stack_size(*stack_a);
 	pushes = 0;
 	i = 0;
+	//Esta lógica tiene como objetivo mover elementos de menor valor a stack_b
+	//y rotar los elementos más grandes dentro de stack_a
+	//Al mover elementos con índices bajos a stack_b, se hace más fácil
+	//insertarlos de nuevo en el orden correcto más adelante, 
+	//minimizando las rotaciones y movimientos necesarios.
 	while (stack_size > 6 && i < stack_size && pushes < stack_size / 2)
 	{
+		//Mueve aproximadamente la mitad de los elementos de stack_a
+		//a stack_b si el índice del elemento es menor o igual
+		//a la mitad del tamaño total.
 		if ((*stack_a)->index <= stack_size / 2)
 		{
 			do_pb(stack_a, stack_b);
 			pushes++;
 		}
 		else
+		//Los elementos que no cumplen la condición se rotan hacia
+		//la parte inferior de stack_a
 			do_ra(stack_a);
 		i++;
 	}
+	//Este bucle se asegura de que solo quedan 3 elementos en A
 	while (stack_size - pushes > 3)
 	{
 		do_pb(stack_a, stack_b);

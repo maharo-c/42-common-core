@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:53:40 by margarita         #+#    #+#             */
-/*   Updated: 2024/10/14 16:28:24 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 23:21:15 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,22 @@
 /*	Calculates and assigns a target position for each element in stack B
 	based on their index, relative to the position of elements in stack A */
 
+//La posición objetivo indica dónde debería colocarse cada nodo de stack_b
+//al moverlo a stack_a para que la pila stack_a se mantenga ordenada.
+
 void	get_target_position(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
 	int		target;
 
-	tmp = *stack_b;
-	get_position(stack_a);
-	get_position(stack_b);
-	target = 0;
+	tmp = *stack_b; //Inicialización puntero auxiliar
+	get_position(stack_a); //Asignamos valor a las posiciones del stack A
+	get_position(stack_b); //Asignamos valor a las posiciones del stack B
+	target = 0; //Variable usada para llevar el seguimiento de la pos objetivo
 	while (tmp)
 	{
 		target = get_target(stack_a, tmp->index, INT_MAX, target);
+		//Buscamos la posición adecuada en el stack A del nodo del stack B
 		tmp->target = target;
 		tmp = tmp->next;
 	}

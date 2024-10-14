@@ -6,11 +6,29 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 10:40:16 by margarita         #+#    #+#             */
-/*   Updated: 2024/10/02 07:50:59 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 23:58:57 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*	Chooses which move to make to get the stack B element to the correct
+	position in stack A.
+	If the costs of moving stack A and B into position match,
+	both will be rotated or reverse rotated at the same time.
+	They might also be rotated separately, before finally pushing
+	the top element of B to the top element of A. */
+
+void	do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
+{
+	if (cost_a < 0 && cost_b < 0)
+		reverse_both(a, b, &cost_a, &cost_b);
+	else if (cost_a > 0 && cost_b > 0)
+		rotate_both(a, b, &cost_a, &cost_b);
+	rotate_a(a, &cost_a);
+	rotate_b(b, &cost_b);
+	do_pa(a, b);
+}
 
 /*	Rotates stack B until it is in position. If the cost is negative,
 	the stack will be reverse rotated, if it is positive, it will be 
@@ -84,22 +102,4 @@ static void	reverse_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 		(*cost_b)++;
 		do_rrr(a, b);
 	}
-}
-
-/*	Chooses which move to make to get the stack B element to the correct
-	position in stack A.
-	If the costs of moving stack A and B into position match,
-	both will be rotated or reverse rotated at the sme time.
-	They might also be rotated separately, before finally pushing
-	the top element of B to the top element of A. */
-
-void	do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
-{
-	if (cost_a < 0 && cost_b < 0)
-		reverse_both(a, b, &cost_a, &cost_b);
-	else if (cost_a > 0 && cost_b > 0)
-		rotate_both(a, b, &cost_a, &cost_b);
-	rotate_a(a, &cost_a);
-	rotate_b(b, &cost_b);
-	do_pa(a, b);
 }
