@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:32:01 by margarita         #+#    #+#             */
-/*   Updated: 2024/10/01 17:22:48 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 12:06:02 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 {
-	if (stack_size == 2 && !is_sorted(*stack_a))
-		do_sa(stack_a);
-	else if (stack_size == 3)
-		sort_three(stack_a);
-	else if (stack_size > 3 && !is_sorted(*stack_a))
-		sort(stack_a, stack_b);
+	if (stack_size == 2 && !is_sorted(*stack_a)) //Si tamaño 2 y no está ordenado
+		do_sa(stack_a); //Intercambiamos
+	else if (stack_size == 3) //Si tamaño 3
+		sort_three(stack_a); //Ordenamos pila de 3
+	else if (stack_size > 3 && !is_sorted(*stack_a)) //Si tamaño >3 y no ordenado
+		sort(stack_a, stack_b); //Ordenamos pila >3 elementos
 }
 
 /* Checks if the input is correct, in which case it initializes stacks a and b,

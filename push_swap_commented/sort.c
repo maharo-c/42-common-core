@@ -6,44 +6,30 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:32 by margarita         #+#    #+#             */
-/*   Updated: 2024/09/24 22:40:09 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 16:28:23 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* Returns the highest index in a stack. */
+/*	Sorting algorithm for a stack larger than 3.
+	 Push everything but 3 numbers to stack B.
+	 Sort the 3 numbers left in stack A.
+	 Calculate the most cost-effective move.
+	 Shift elements until stack A is in order. */
 
-static int	biggest_index(t_stack *stack)
+void	sort(t_stack **stack_a, t_stack **stack_b)
 {
-	int	index;
-
-	index = stack->index;
-	while (stack)
+	push_init(stack_a, stack_b); //Movemos todos los elementos (excepto 3 al stack B)
+	sort_three(stack_a); //Ordenamos los 3 elementos restantes en A
+	while (*stack_b) //Mientras existan elementos en B
 	{
-		if (stack->index > index)
-			index = stack->index;
-		stack = stack->next;
+		get_target_position(stack_a, stack_b);
+		cost(stack_a, stack_b);
+		cheapest_move(stack_a, stack_b);
 	}
-	return (index);
-}
-
-/*	Sorts a stack of 3 numbers in 2 or fewer moves. The sorting is done by index
-	rather than value. */
-
-void	sort_three(t_stack **stack)
-{
-	int	biggest;
-
-	if (is_sorted(*stack))
-		return ;
-	biggest = biggest_index(*stack);
-	if ((*stack)->index == biggest)
-		do_ra(stack);
-	else if ((*stack)->next->index == biggest)
-		do_rra(stack);
-	if ((*stack)->index > (*stack)->next->index)
-		do_sa(stack);
+	if (!is_sorted(*stack_a))
+		sort_stack(stack_a);
 }
 
 /*	Pushes all the elements of stack a into stack b, except the three last.
@@ -76,6 +62,24 @@ void	push_init(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+/*	Sorts a stack of 3 numbers in 2 or fewer moves. The sorting is done by index
+	rather than value. */
+
+void	sort_three(t_stack **stack)
+{
+	int	biggest;
+
+	if (is_sorted(*stack)) //Return si está ordenado
+		return ;
+	biggest = biggest_index(*stack); //Buscamos el índice mayor
+	if ((*stack)->index == biggest) //Si el índice del primer nodo es el mayor
+		do_ra(stack); //Rotamos stack A, pasando el primer elemento a la última posición
+	else if ((*stack)->next->index == biggest) //Si el índice del segundo nodo es el mayor
+		do_rra(stack); //Rotamos al revés el stack A, pasando el segundo nodo a la última posición
+	if ((*stack)->index > (*stack)->next->index) //Comparamos los índices del primer y segundo nodo
+		do_sa(stack); //Intercambiamos si el índice del primer nodo es mayor al del segundo nodo
+}
+
 /*	The stack a is almost sorted, rotate stack a until the lowest
 	value is at the top. If it is in the bottom half of the stack, reverse
 	rotate, otherwise rotate until it is at the top. */
@@ -105,22 +109,18 @@ static void	sort_stack(t_stack **stack_a)
 	}
 }
 
-/*	Sorting algorithm for a stack larger than 3.
-	 Push everything but 3 numbers to stack B.
-	 Sort the 3 numbers left in stack A.
-	 Calculate the most cost-effective move.
-	 Shift elements until stack A is in order. */
+/* Returns the highest index in a stack. */
 
-void	sort(t_stack **stack_a, t_stack **stack_b)
+static int	biggest_index(t_stack *stack)
 {
-	push_init(stack_a, stack_b);
-	sort_three(stack_a);
-	while (*stack_b)
+	int	index;
+
+	index = stack->index;
+	while (stack)
 	{
-		get_target_position(stack_a, stack_b);
-		cost(stack_a, stack_b);
-		cheapest_move(stack_a, stack_b);
+		if (stack->index > index)
+			index = stack->index;
+		stack = stack->next;
 	}
-	if (!is_sorted(*stack_a))
-		sort_stack(stack_a);
+	return (index);
 }

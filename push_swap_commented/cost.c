@@ -6,7 +6,7 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 10:11:40 by margarita         #+#    #+#             */
-/*   Updated: 2024/09/25 10:39:35 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 16:33:58 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	cheapest_move(t_stack **stack_a, t_stack **stack_b)
 	}
 	do_move(stack_a, stack_b, cost_a, cost_b);	
 }
-
 
 /*	Calculates the cost of moving each element of stack B into the correct 
 	position in stack A.

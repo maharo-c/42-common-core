@@ -6,11 +6,31 @@
 /*   By: margarita <margarita@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:53:40 by margarita         #+#    #+#             */
-/*   Updated: 2024/10/02 07:49:44 by margarita        ###   ########.fr       */
+/*   Updated: 2024/10/14 16:28:24 by margarita        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*	Calculates and assigns a target position for each element in stack B
+	based on their index, relative to the position of elements in stack A */
+
+void	get_target_position(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*tmp;
+	int		target;
+
+	tmp = *stack_b;
+	get_position(stack_a);
+	get_position(stack_b);
+	target = 0;
+	while (tmp)
+	{
+		target = get_target(stack_a, tmp->index, INT_MAX, target);
+		tmp->target = target;
+		tmp = tmp->next;
+	}
+}
 
 /*	Assigns a position to each element of a stack from top to bottom
 	is ascending order. It is used to calculate the cost of moving a certain
@@ -29,30 +49,6 @@ static void	get_position(t_stack **stack)
 		tmp = tmp->next;
 		i++;
 	}
-}
-
-/*	Gets the current position of the element with the lowest index. */
-
-int	position_lowest_index(t_stack **stack)
-{
-	t_stack	*tmp;
-	int		lowest_i;
-	int		lowest_p;
-
-	tmp = *stack;
-	lowest_i = INT_MAX;
-	get_position(stack);
-	lowest_p = tmp->pos;
-	while (tmp)
-	{
-		if (tmp->index < lowest_i)
-		{
-			lowest_i = tmp->index;
-			lowest_p = tmp->pos;
-		}
-		tmp = tmp->next;
-	}
-	return (lowest_p);
 }
 
 /*	Picks the best target position in stack A for the given index of
@@ -90,24 +86,26 @@ static int	get_target(t_stack **stack_a, int index_b, int target_i, int target)
 	return (target);
 }
 
-/*	Assigns a target position in stack A to each element. The target position is
-	the spot the element in B needs to get to in order to be sorted.
-	This postion will be used to calculate the cost of moving each element
-	to its target position. */
+/*	Gets the current position of the element with the lowest index. */
 
-void	get_target_position(t_stack **stack_a, t_stack **stack_b)
+int	position_lowest_index(t_stack **stack)
 {
 	t_stack	*tmp;
-	int		target;
+	int		lowest_i;
+	int		lowest_p;
 
-	tmp = *stack_b;
-	get_position(stack_a);
-	get_position(stack_b);
-	target = 0;
+	tmp = *stack;
+	lowest_i = INT_MAX;
+	get_position(stack);
+	lowest_p = tmp->pos;
 	while (tmp)
 	{
-		target = get_target(stack_a, tmp->index, INT_MAX, target);
-		tmp->target = target;
+		if (tmp->index < lowest_i)
+		{
+			lowest_i = tmp->index;
+			lowest_p = tmp->pos;
+		}
 		tmp = tmp->next;
 	}
+	return (lowest_p);
 }
