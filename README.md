@@ -1,4 +1,3 @@
-(https://github.com/maharo-c/42-common-core)
 # 42-common-core
 
 | Project          | Description                                                                                     |
